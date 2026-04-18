@@ -123,16 +123,12 @@ start index.html
 
 **Team Lead:** Mohammed Shameel H  
 **Email:** mdshameel738@gmail.com  
-**Phone:** 6362036845  
-**Institution:** Manglore Institute of Technology  
-**Department:** CSE — IoT & Cyber Security  
+
 
 ---
 
 ## 📄 License
 
-MIT License — free to use, modify, and distribute.
-
+MIT License -pamented idea not for distubution
 ---
 
-*Made with ❤️ in Mangalore for Bharat's workforce*
