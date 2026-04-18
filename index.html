@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAROKAM — Kam Miley Kabhi</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --or:#FF5C1A;--or2:#FF8C42;--bl:#0A1628;--bl2:#0D1F3C;--tl:#00C9A7;
+  --lt:#F5F0EB;--wh:#FFFFFF;--gy:#8B8B8B;--bd:#E8E1D9;
+  --card:#FFFFFF;--shadow:0 4px 32px rgba(10,22,40,0.10);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--lt);color:var(--bl);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{background:var(--bl);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:999;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--wh);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.logo-dot{width:10px;height:10px;background:var(--or);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{background:none;border:none;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:8px 18px;border-radius:8px;cursor:pointer;transition:.2s;font-weight:500}
+.nav-tab:hover,.nav-tab.active{background:rgba(255,255,255,.12);color:#fff}
+.nav-tab.active{background:var(--or);color:#fff}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-user{color:rgba(255,255,255,.8);font-size:.9rem}
+.btn-nav{background:var(--or);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:.2s}
+.btn-nav:hover{background:var(--or2);transform:translateY(-1px)}
+
+/* PAGES */
+.page{display:none;min-height:calc(100vh - 64px);padding:40px 5%}
+.page.active{display:block}
+
+/* ── HERO (HOME) ── */
+#home{padding:0;min-height:calc(100vh - 64px);display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,var(--bl) 0%,var(--bl2) 60%,#0f2744 100%);flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;padding:80px 5%;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,92,26,.15) 0%,transparent 70%);pointer-events:none}
+.hero-text{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,26,.15);border:1px solid rgba(255,92,26,.3);color:var(--or2);padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px}
+.hero h1 span{color:var(--or);display:block}
+.hero-sub{color:rgba(255,255,255,.65);font-size:1.05rem;line-height:1.7;margin-bottom:32px;max-width:440px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--or);color:#fff;border:none;padding:14px 32px;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--or2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,92,26,.4)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.25);padding:14px 32px;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;transition:.2s}
+.btn-outline:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.08)}
+.hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1)}
+.h-stat h3{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff}
+.h-stat p{color:rgba(255,255,255,.5);font-size:.8rem}
+.hero-visual{position:relative;z-index:1}
+.app-mockup{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:24px;backdrop-filter:blur(10px)}
+.mockup-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.mockup-title{color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem}
+.mockup-badge{background:var(--tl);color:var(--bl);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:100px}
+.job-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px;animation:floatUp 3s ease-in-out infinite}
+.job-pill:nth-child(2){animation-delay:.5s}.job-pill:nth-child(3){animation-delay:1s}
+@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.job-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.job-info{flex:1}
+.job-name{color:#fff;font-weight:600;font-size:.9rem}
+.job-dist{color:rgba(255,255,255,.5);font-size:.78rem}
+.job-pay{color:var(--tl);font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;white-space:nowrap}
+
+/* SECTION STYLES */
+.section-label{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;color:var(--bl);line-height:1.2;margin-bottom:16px}
+.section-sub{color:var(--gy);font-size:1rem;line-height:1.7;max-width:560px}
+
+/* STATS BAND */
+.stats-band{background:var(--or);padding:40px 5%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stats-band .num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:#fff}
+.stats-band .lbl{color:rgba(255,255,255,.75);font-size:.85rem;margin-top:4px}
+
+/* FEATURES SECTION */
+.features-section{padding:80px 5%;background:var(--lt)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.feat-card{background:var(--wh);border-radius:20px;padding:28px;box-shadow:var(--shadow);transition:.3s;border:1px solid var(--bd)}
+.feat-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(10,22,40,.15)}
+.feat-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px}
+.feat-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:8px;color:var(--bl)}
+.feat-card p{color:var(--gy);font-size:.88rem;line-height:1.65}
+
+/* JOBS PAGE */
+.jobs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.jobs-filters{display:flex;gap:10px;flex-wrap:wrap}
+.filter-btn{background:var(--wh);border:1.5px solid var(--bd);color:var(--bl);padding:8px 18px;border-radius:100px;font-size:.85rem;font-weight:500;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif}
+.filter-btn.active,.filter-btn:hover{background:var(--or);border-color:var(--or);color:#fff}
+.search-bar{background:var(--wh);border:1.5px solid var(--bd);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:10px;margin-bottom:28px;box-shadow:var(--shadow)}
+.search-bar input{border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:.95rem;flex:1;background:transparent;color:var(--bl)}
+.search-icon{color:var(--gy);font-size:1.1rem}
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.job-card{background:var(--wh);border-radius:20px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--bd);transition:.3s;cursor:pointer}
+.job-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(10,22,40,.15);border-color:var(--or)}
+.job-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.job-cat{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:100px}
+.cat-construction{background:#FFF3E8;color:#E8651A}
+.cat-catering{background:#E8F5E9;color:#2E7D32}
+.cat-hospitality{background:#E3F2FD;color:#1565C0}
+.cat-domestic{background:#F3E5F5;color:#6A1B9A}
+.cat-retail{background:#FFF8E1;color:#F57F17}
+.job-dist-badge{display:flex;align-items:center;gap:4px;color:var(--gy);font-size:.8rem}
+.job-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:var(--bl)}
+.job-desc{color:var(--gy);font-size:.85rem;line-height:1.6;margin-bottom:16px}
+.job-card-meta{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.meta-item{display:flex;align-items:center;gap:5px;font-size:.82rem;color:var(--gy)}
+.job-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--bd)}
+.job-wage{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--bl)}
+.job-wage span{font-size:.75rem;font-weight:400;color:var(--gy)}
+.btn-apply{background:var(--or);color:#fff;border:none;padding:9px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:.2s}
+.btn-apply:hover{background:var(--or2);transform:translateY(-1px)}
+.btn-applied{background:#E8F5E9;color:#2E7D32;border:none;padding:9px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:default}
+
+/* POST JOB PAGE */
+.post-form{background:var(--wh);border-radius:24px;padding:40px;max-width:680px;margin:0 auto;box-shadow:var(--shadow);border:1px solid var(--bd)}
+.form-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:var(--bl);margin-bottom:8px}
+.form-sub{color:var(--gy);font-size:.9rem;margin-bottom:32px}
+.form-group{margin-bottom:22px}
+.form-label{display:block;font-weight:600;font-size:.85rem;color:var(--bl);margin-bottom:8px}
+.form-input,.form-select,.form-textarea{width:100%;padding:12px 16px;border:1.5px solid var(--bd);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--bl);background:var(--lt);transition:.2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--or);background:#fff;box-shadow:0 0 0 3px rgba(255,92,26,.08)}
+.form-textarea{min-height:100px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-submit{background:var(--or);color:#fff;border:none;padding:15px 40px;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:.2s;width:100%;margin-top:8px}
+.btn-submit:hover{background:var(--or2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,92,26,.3)}
+
+/* POSTED JOBS */
+.posted-list{margin-top:32px}
+.posted-item{background:var(--wh);border-radius:16px;padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.posted-info h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:4px}
+.posted-info p{color:var(--gy);font-size:.84rem}
+.posted-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.status-badge{padding:5px 14px;border-radius:100px;font-size:.78rem;font-weight:700}
+.status-open{background:#E8F5E9;color:#2E7D32}
+.status-filled{background:#FFF3E8;color:#E8651A}
+.btn-manage{background:var(--bl);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s}
+.btn-manage:hover{background:var(--or)}
+
+/* PROFILE PAGE */
+.profile-top{background:linear-gradient(135deg,var(--bl),var(--bl2));border-radius:24px;padding:40px;color:#fff;margin-bottom:28px;position:relative;overflow:hidden}
+.profile-top::after{content:'';position:absolute;top:-30%;right:-5%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,92,26,.2),transparent 70%);pointer-events:none}
+.profile-avatar{width:72px;height:72px;background:var(--or);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:16px}
+.profile-name{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:4px}
+.profile-type{color:rgba(255,255,255,.6);font-size:.9rem;display:flex;align-items:center;gap:8px}
+.verified-tick{background:var(--tl);color:var(--bl);font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:100px}
+.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.p-stat{background:rgba(255,255,255,.08);border-radius:14px;padding:16px;text-align:center}
+.p-stat-val{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800}
+.p-stat-lbl{color:rgba(255,255,255,.55);font-size:.78rem;margin-top:2px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.profile-card{background:var(--wh);border-radius:20px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--bd)}
+.profile-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:18px;color:var(--bl)}
+.skill-tag{display:inline-block;background:var(--lt);border:1px solid var(--bd);color:var(--bl);padding:6px 16px;border-radius:100px;font-size:.82rem;font-weight:500;margin:4px 4px 4px 0}
+.info-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd);font-size:.88rem}
+.info-row:last-child{border-bottom:none}
+.info-row .key{color:var(--gy)}
+.info-row .val{font-weight:600;color:var(--bl)}
+
+/* APPLICATIONS */
+.apps-grid{display:grid;gap:16px}
+.app-card{background:var(--wh);border-radius:16px;padding:20px 24px;box-shadow:var(--shadow);border:1px solid var(--bd);display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px}
+.app-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:4px}
+.app-meta{color:var(--gy);font-size:.82rem;display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.app-status{padding:6px 16px;border-radius:100px;font-size:.78rem;font-weight:700}
+.app-pending{background:#FFF8E1;color:#F57F17}
+.app-accepted{background:#E8F5E9;color:#2E7D32}
+.app-completed{background:#E3F2FD;color:#1565C0}
+.app-actions{display:flex;gap:8px;flex-direction:column}
+.btn-sm{border:none;padding:7px 16px;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;cursor:pointer;transition:.2s}
+.btn-accept{background:#E8F5E9;color:#2E7D32}
+.btn-accept:hover{background:#2E7D32;color:#fff}
+.btn-reject{background:#FFEBEE;color:#C62828}
+.btn-reject:hover{background:#C62828;color:#fff}
+.btn-complete{background:var(--or);color:#fff}
+.btn-complete:hover{background:var(--or2)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--bl);color:#fff;padding:14px 24px;border-radius:14px;font-size:.9rem;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:9999;transform:translateY(100px);opacity:0;transition:.3s;display:flex;align-items:center;gap:10px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-icon{font-size:1rem}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--wh);border-radius:24px;padding:32px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);transform:scale(.95);transition:.25s}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal h2{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;margin-bottom:20px;color:var(--bl)}
+.modal-info{display:grid;gap:10px;margin-bottom:24px}
+.modal-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd);font-size:.9rem}
+.modal-row:last-child{border-bottom:none}
+.modal-row .mk{color:var(--gy)}.modal-row .mv{font-weight:600}
+.modal-btns{display:flex;gap:10px}
+.btn-modal-apply{flex:1;background:var(--or);color:#fff;border:none;padding:13px;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.95rem;transition:.2s}
+.btn-modal-apply:hover{background:var(--or2)}
+.btn-modal-close{background:var(--lt);color:var(--bl);border:1px solid var(--bd);padding:13px 20px;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;font-size:.95rem}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:60px 20px;color:var(--gy)}
+.empty-icon{font-size:3rem;margin-bottom:16px}
+.empty h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--bl);margin-bottom:8px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center;padding:60px 5%}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-visual{display:none}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .stats-band{grid-template-columns:1fr 1fr;gap:16px}
+  .profile-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .profile-stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  nav{padding:0 4%}
+  .nav-tabs{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .stats-band{grid-template-columns:1fr 1fr}
+  .page{padding:24px 4%}
+  .post-form{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span class="logo-dot"></span>KAROKAM</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="goTo('home')">Home</button>
+    <button class="nav-tab" onclick="goTo('jobs')">Find Jobs</button>
+    <button class="nav-tab" onclick="goTo('post')">Post Job</button>
+    <button class="nav-tab" onclick="goTo('applications')">Applications</button>
+    <button class="nav-tab" onclick="goTo('profile')">Profile</button>
+  </div>
+  <div class="nav-right">
+    <span class="nav-user" id="navUser">Rajesh Kumar</span>
+    <button class="btn-nav" onclick="switchUser()">Switch User</button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">🇮🇳 Made for Bharat's Workforce</div>
+      <h1>Kaam Dhundo,<span>Kaam Do.</span></h1>
+      <p class="hero-sub">KAROKAM connects 10M+ daily wage workers with verified employers using GPS-powered real-time matching. Construction, catering, hospitality — all in one place.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goTo('jobs')">Browse Jobs Nearby →</button>
+        <button class="btn-outline" onclick="goTo('post')">Post a Job</button>
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat"><h3>10M+</h3><p>Daily Workers</p></div>
+        <div class="h-stat"><h3>5km</h3><p>GPS Radius</p></div>
+        <div class="h-stat"><h3>30x</h3><p>Faster Hiring</p></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="app-mockup">
+        <div class="mockup-header">
+          <span class="mockup-title">Jobs Near You</span>
+          <span class="mockup-badge">4 Found</span>
+        </div>
+        <div class="job-pill">
+          <div class="job-icon" style="background:#FFF3E8">🧱</div>
+          <div class="job-info"><div class="job-name">Brick Laying Work</div><div class="job-dist">📍 0.3 km · Construction</div></div>
+          <div class="job-pay">₹500/day</div>
+        </div>
+        <div class="job-pill">
+          <div class="job-icon" style="background:#E8F5E9">🍽️</div>
+          <div class="job-info"><div class="job-name">Catering Staff</div><div class="job-dist">📍 0.8 km · Catering</div></div>
+          <div class="job-pay">₹400/day</div>
+        </div>
+        <div class="job-pill">
+          <div class="job-icon" style="background:#E3F2FD">🏨</div>
+          <div class="job-info"><div class="job-name">Hotel Housekeeping</div><div class="job-dist">📍 1.2 km · Hospitality</div></div>
+          <div class="job-pay">₹380/day</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-band">
+    <div><div class="num">₹5,000 Cr</div><div class="lbl">Market Opportunity</div></div>
+    <div><div class="num">5 Lang</div><div class="lbl">Hindi, Kannada, Tamil, Telugu, English</div></div>
+    <div><div class="num">40%</div><div class="lbl">More Earnings for Workers</div></div>
+    <div><div class="num">100M+</div><div class="lbl">Informal Workers in India</div></div>
+  </div>
+
+  <div class="features-section" style="padding:80px 0">
+    <div style="padding:0 0">
+      <div class="section-label">Why KAROKAM</div>
+      <div class="section-title">Built Different.<br>For the Real India.</div>
+      <p class="section-sub">While other apps serve IT professionals, KAROKAM is 100% designed for the informal workforce — construction workers, cooks, cleaners, and caregivers.</p>
+    </div>
+    <div class="features-grid" style="margin-top:40px">
+      <div class="feat-card"><div class="feat-icon" style="background:#FFF3E8">📍</div><h3>GPS Real-Time Matching</h3><p>Find jobs within 5km. Workers get notified the moment a matching job is posted nearby.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:#E8F5E9">🗣️</div><h3>Voice-First Interface</h3><p>Full audio navigation in 5 languages. Works for workers who can't read or type.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:#E3F2FD">✅</div><h3>Trust & Verification</h3><p>Verified contractor badges, secure escrow payments, and star ratings build community trust.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:#F3E5F5">💸</div><h3>Secure Payments</h3><p>UPI, card, or bank transfer. Escrow-based — money releases only after job is confirmed complete.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:#FFF8E1">📱</div><h3>Offline-First</h3><p>Feature phone support via USSD. SMS-based notifications. Works in low-connectivity areas.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:#E8F5E9">🤝</div><h3>Community Vouching</h3><p>Local community endorsements replace formal documentation for workers without IDs.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- JOBS PAGE -->
+<div id="page-jobs" class="page">
+  <div class="jobs-header">
+    <div>
+      <div class="section-label">Mangalore, Karnataka</div>
+      <div class="section-title" style="margin-bottom:0;font-size:1.8rem">Jobs Near You</div>
+    </div>
+    <div class="jobs-filters">
+      <button class="filter-btn active" onclick="filterJobs('all',this)">All</button>
+      <button class="filter-btn" onclick="filterJobs('construction',this)">🧱 Construction</button>
+      <button class="filter-btn" onclick="filterJobs('catering',this)">🍽️ Catering</button>
+      <button class="filter-btn" onclick="filterJobs('hospitality',this)">🏨 Hospitality</button>
+      <button class="filter-btn" onclick="filterJobs('domestic',this)">🏠 Domestic</button>
+      <button class="filter-btn" onclick="filterJobs('retail',this)">🛒 Retail</button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search jobs by title or skill..." oninput="searchJobs()">
+  </div>
+  <div class="jobs-grid" id="jobsGrid"></div>
+</div>
+
+<!-- POST JOB PAGE -->
+<div id="page-post" class="page">
+  <div style="max-width:680px;margin:0 auto">
+    <div class="section-label">Employer Panel</div>
+    <div class="section-title" style="font-size:1.8rem;margin-bottom:6px">Post a New Job</div>
+    <p style="color:var(--gy);margin-bottom:32px">Fill in details and workers nearby will be notified instantly.</p>
+
+    <div class="post-form">
+      <form onsubmit="postJob(event)">
+        <div class="form-group">
+          <label class="form-label">Job Title *</label>
+          <input class="form-input" id="jTitle" type="text" placeholder="e.g. 3 Construction Workers Needed" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea class="form-textarea" id="jDesc" placeholder="Describe the work, requirements, any tools provided..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-select" id="jCat" required>
+              <option value="">Select category</option>
+              <option value="construction">🧱 Construction</option>
+              <option value="catering">🍽️ Catering</option>
+              <option value="hospitality">🏨 Hospitality</option>
+              <option value="domestic">🏠 Domestic</option>
+              <option value="retail">🛒 Retail</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Daily Wage (₹) *</label>
+            <input class="form-input" id="jWage" type="number" placeholder="e.g. 500" min="100" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Duration</label>
+            <input class="form-input" id="jDur" type="text" placeholder="e.g. 8 hours / 3 days">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Workers Needed</label>
+            <input class="form-input" id="jCount" type="number" placeholder="e.g. 3" min="1" value="1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input class="form-input" id="jLoc" type="text" placeholder="e.g. Hampankatta, Mangalore" value="Mangalore, Karnataka">
+        </div>
+        <button type="submit" class="btn-submit">Post Job → Notify Workers Nearby</button>
+      </form>
+    </div>
+
+    <div id="postedList" class="posted-list"></div>
+  </div>
+</div>
+
+<!-- APPLICATIONS PAGE -->
+<div id="page-applications" class="page">
+  <div class="section-label">My Work</div>
+  <div class="section-title" style="font-size:1.8rem;margin-bottom:8px">Applications</div>
+  <p style="color:var(--gy);margin-bottom:28px">Track all your job applications and current work status.</p>
+  <div class="apps-grid" id="appsGrid"></div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div id="page-profile" class="page">
+  <div id="profileContent"></div>
+</div>
+
+<!-- JOB DETAIL MODAL -->
+<div class="modal-overlay" id="jobModal" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <h2 id="modalTitle">Job Details</h2>
+    <div class="modal-info" id="modalInfo"></div>
+    <div class="modal-btns">
+      <button class="btn-modal-apply" id="modalApplyBtn" onclick="applyFromModal()">Apply Now</button>
+      <button class="btn-modal-close" onclick="document.getElementById('jobModal').classList.remove('open')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-icon" id="toastIcon">✅</span><span id="toastMsg"></span></div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const USERS = {
+  worker: {
+    name: 'Rajesh Kumar', type: 'worker', phone: '9876543210',
+    skills: ['Construction','Brick Laying','Painting','Carpentry'],
+    rating: 4.7, jobs: 34, earnings: 82000, verified: true,
+    city: 'Mangalore, Karnataka'
+  },
+  contractor: {
+    name: 'BuildCorp Pvt Ltd', type: 'contractor', phone: '9999888877',
+    skills: ['Hiring','Project Management','Site Supervision'],
+    rating: 4.5, jobs: 112, earnings: 0, verified: true,
+    city: 'Mangalore, Karnataka'
+  }
+};
+
+let currentUser = JSON.parse(localStorage.getItem('kk_user') || 'null') || USERS.worker;
+let allJobs = JSON.parse(localStorage.getItem('kk_jobs') || 'null') || [
+  { id:1, title:'Brick Laying – 4 Workers', desc:'Need 4 workers for foundation work at Hampankatta construction site. Tools provided. Meals included.', cat:'construction', wage:500, dur:'8 hours', workers:4, loc:'Hampankatta, 0.3 km', status:'open', poster:'Shetty Constructions', applied:false },
+  { id:2, title:'Catering Staff – Wedding', desc:'200-guest wedding function. Need servers, kitchen helpers. Experience preferred. Smart dress required.', cat:'catering', wage:400, dur:'10 hours', workers:5, loc:'Kadri, 0.8 km', status:'open', poster:'Nayak Events', applied:false },
+  { id:3, title:'Hotel Housekeeping', desc:'3-star hotel needs 2 housekeeping staff. Daily shift, immediate start. Prior hotel experience a plus.', cat:'hospitality', wage:380, dur:'8 hours / day', workers:2, loc:'Balmatta, 1.2 km', status:'open', poster:'Hotel Residency', applied:false },
+  { id:4, title:'House Painting – Interior', desc:'3BHK apartment interior painting. Paint supplied. Need experienced painters only.', cat:'construction', wage:550, dur:'3 days', workers:2, loc:'Bejai, 1.5 km', status:'open', poster:'Fernandes Builders', applied:false },
+  { id:5, title:'Grocery Shop Helper', desc:'Morning shift at supermarket. Stacking shelves, billing assist, delivery. Long-term opportunity.', cat:'retail', wage:300, dur:'6 hours', workers:1, loc:'Car Street, 0.5 km', status:'open', poster:'Hegde Stores', applied:false },
+  { id:6, title:'Old Age Care Taker', desc:'Need gentle, experienced care taker for elderly couple. Live-in preferred. Must speak Kannada.', cat:'domestic', wage:600, dur:'Full time', workers:1, loc:'Attavar, 2.1 km', status:'open', poster:'Private Household', applied:false },
+];
+let myApplications = JSON.parse(localStorage.getItem('kk_apps') || '[]');
+let currentJobId = null;
+
+function saveAll() {
+  localStorage.setItem('kk_user', JSON.stringify(currentUser));
+  localStorage.setItem('kk_jobs', JSON.stringify(allJobs));
+  localStorage.setItem('kk_apps', JSON.stringify(myApplications));
+}
+
+// ─── NAVIGATION ─────────────────────────────────────────────────────────────
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const map = ['home','jobs','post','applications','profile'];
+  const idx = map.indexOf(page);
+  if (idx >= 0) tabs[idx].classList.add('active');
+  window.scrollTo(0, 0);
+
+  if (page === 'jobs') renderJobs();
+  if (page === 'applications') renderApplications();
+  if (page === 'profile') renderProfile();
+  if (page === 'post') renderPostedJobs();
+}
+
+// ─── USER SWITCH ─────────────────────────────────────────────────────────────
+function switchUser() {
+  currentUser = currentUser.type === 'worker' ? USERS.contractor : USERS.worker;
+  saveAll();
+  document.getElementById('navUser').textContent = currentUser.name;
+  toast('✅', 'Switched to ' + currentUser.name);
+  const activePage = document.querySelector('.page.active').id.replace('page-','');
+  goTo(activePage);
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+function toast(icon, msg) {
+  const el = document.getElementById('toast');
+  document.getElementById('toastIcon').textContent = icon;
+  document.getElementById('toastMsg').textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ─── JOBS ────────────────────────────────────────────────────────────────────
+const CAT_LABEL = { construction:'🧱 Construction', catering:'🍽️ Catering', hospitality:'🏨 Hospitality', domestic:'🏠 Domestic', retail:'🛒 Retail' };
+let activeFilter = 'all';
+
+function filterJobs(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderJobs();
+}
+
+function searchJobs() { renderJobs(); }
+
+function renderJobs() {
+  const query = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  let jobs = allJobs.filter(j => {
+    const matchCat = activeFilter === 'all' || j.cat === activeFilter;
+    const matchQ = !query || j.title.toLowerCase().includes(query) || j.desc.toLowerCase().includes(query);
+    return matchCat && matchQ;
+  });
+  const grid = document.getElementById('jobsGrid');
+  if (!jobs.length) {
+    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🔍</div><h3>No jobs found</h3><p>Try different filters or check back later.</p></div>';
+    return;
+  }
+  grid.innerHTML = jobs.map(j => `
+    <div class="job-card" onclick="openJobModal(${j.id})">
+      <div class="job-card-top">
+        <span class="job-cat cat-${j.cat}">${CAT_LABEL[j.cat]}</span>
+        <span class="job-dist-badge">📍 ${j.loc.split(',')[1] || j.loc}</span>
+      </div>
+      <h3>${j.title}</h3>
+      <p class="job-desc">${j.desc.slice(0,90)}...</p>
+      <div class="job-card-meta">
+        <span class="meta-item">⏱️ ${j.dur}</span>
+        <span class="meta-item">👥 ${j.workers} needed</span>
+        <span class="meta-item">📌 ${j.loc.split(',')[0]}</span>
+      </div>
+      <div class="job-card-footer">
+        <div class="job-wage">₹${j.wage}<span>/day</span></div>
+        ${j.applied ? '<button class="btn-applied" disabled>✓ Applied</button>' : '<button class="btn-apply" onclick="quickApply(event,'+j.id+')">Apply Now</button>'}
+      </div>
+    </div>
+  `).join('');
+}
+
+function openJobModal(id) {
+  const j = allJobs.find(x => x.id === id);
+  if (!j) return;
+  currentJobId = id;
+  document.getElementById('modalTitle').textContent = j.title;
+  document.getElementById('modalInfo').innerHTML = `
+    <div class="modal-row"><span class="mk">Category</span><span class="mv">${CAT_LABEL[j.cat]}</span></div>
+    <div class="modal-row"><span class="mk">Daily Wage</span><span class="mv" style="color:var(--or);font-size:1.1rem">₹${j.wage}</span></div>
+    <div class="modal-row"><span class="mk">Duration</span><span class="mv">${j.dur}</span></div>
+    <div class="modal-row"><span class="mk">Workers Needed</span><span class="mv">${j.workers}</span></div>
+    <div class="modal-row"><span class="mk">Location</span><span class="mv">${j.loc}</span></div>
+    <div class="modal-row"><span class="mk">Posted By</span><span class="mv">${j.poster}</span></div>
+    <div style="background:var(--lt);border-radius:10px;padding:14px;margin-top:8px;font-size:.88rem;color:var(--gy);line-height:1.6">${j.desc}</div>
+  `;
+  const btn = document.getElementById('modalApplyBtn');
+  if (j.applied) { btn.textContent = '✓ Already Applied'; btn.disabled = true; btn.style.opacity = '.6'; }
+  else { btn.textContent = 'Apply Now'; btn.disabled = false; btn.style.opacity = '1'; }
+  document.getElementById('jobModal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('jobModal')) document.getElementById('jobModal').classList.remove('open');
+}
+
+function applyFromModal() {
+  applyToJob(currentJobId);
+  document.getElementById('jobModal').classList.remove('open');
+}
+
+function quickApply(e, id) {
+  e.stopPropagation();
+  applyToJob(id);
+}
+
+function applyToJob(id) {
+  if (currentUser.type === 'contractor') { toast('⚠️', 'Switch to Worker account to apply'); return; }
+  const j = allJobs.find(x => x.id === id);
+  if (!j || j.applied) return;
+  j.applied = true;
+  myApplications.push({ jobId: id, title: j.title, wage: j.wage, cat: j.cat, loc: j.loc, poster: j.poster, status: 'pending', appliedOn: new Date().toLocaleDateString() });
+  saveAll();
+  renderJobs();
+  toast('✅', 'Applied to "' + j.title + '"!');
+}
+
+// ─── POST JOB ────────────────────────────────────────────────────────────────
+function postJob(e) {
+  e.preventDefault();
+  if (currentUser.type === 'worker') { toast('⚠️', 'Switch to Contractor account to post jobs'); return; }
+  const newJob = {
+    id: Date.now(),
+    title: document.getElementById('jTitle').value,
+    desc: document.getElementById('jDesc').value || 'No additional details provided.',
+    cat: document.getElementById('jCat').value,
+    wage: parseInt(document.getElementById('jWage').value),
+    dur: document.getElementById('jDur').value || '8 hours',
+    workers: parseInt(document.getElementById('jCount').value) || 1,
+    loc: document.getElementById('jLoc').value || 'Mangalore, Karnataka',
+    status: 'open',
+    poster: currentUser.name,
+    applied: false
+  };
+  allJobs.unshift(newJob);
+  saveAll();
+  e.target.reset();
+  document.getElementById('jLoc').value = 'Mangalore, Karnataka';
+  renderPostedJobs();
+  toast('✅', 'Job posted! Workers nearby notified.');
+}
+
+function renderPostedJobs() {
+  const myJobs = allJobs.filter(j => j.poster === currentUser.name);
+  const el = document.getElementById('postedList');
+  if (!myJobs.length) { el.innerHTML = ''; return; }
+  el.innerHTML = '<h3 style="font-family:Syne,sans-serif;font-weight:700;margin-bottom:16px;margin-top:32px">Your Posted Jobs</h3>' +
+    myJobs.map(j => `
+    <div class="posted-item">
+      <div class="posted-info">
+        <h4>${j.title}</h4>
+        <p>₹${j.wage}/day · ${j.dur} · ${j.loc.split(',')[0]} · ${j.workers} workers</p>
+      </div>
+      <div class="posted-meta">
+        <span class="status-badge status-${j.status}">${j.status === 'open' ? '🟢 Open' : '🟡 Filled'}</span>
+        <button class="btn-manage" onclick="toggleJobStatus(${j.id})">${j.status === 'open' ? 'Mark Filled' : 'Reopen'}</button>
+        <button class="btn-manage" style="background:#FFEBEE;color:#C62828" onclick="deleteJob(${j.id})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleJobStatus(id) {
+  const j = allJobs.find(x => x.id === id);
+  if (j) { j.status = j.status === 'open' ? 'filled' : 'open'; saveAll(); renderPostedJobs(); toast('✅','Job status updated'); }
+}
+
+function deleteJob(id) {
+  allJobs = allJobs.filter(x => x.id !== id);
+  saveAll(); renderPostedJobs(); toast('🗑️','Job removed');
+}
+
+// ─── APPLICATIONS ─────────────────────────────────────────────────────────────
+function renderApplications() {
+  const el = document.getElementById('appsGrid');
+  if (!myApplications.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📋</div><h3>No applications yet</h3><p>Browse jobs and apply to see them here.</p><br><button class="btn-primary" onclick="goTo(\'jobs\')">Browse Jobs →</button></div>';
+    return;
+  }
+  el.innerHTML = myApplications.slice().reverse().map((a, i) => `
+    <div class="app-card">
+      <div>
+        <div class="app-title">${a.title}</div>
+        <div class="app-meta">
+          <span>₹${a.wage}/day</span>
+          <span>${CAT_LABEL[a.cat] || a.cat}</span>
+          <span>📌 ${a.loc ? a.loc.split(',')[0] : ''}</span>
+          <span>Applied: ${a.appliedOn}</span>
+        </div>
+        <div style="margin-top:8px;font-size:.82rem;color:var(--gy)">Posted by ${a.poster}</div>
+      </div>
+      <div class="app-actions">
+        <span class="app-status app-${a.status}">${a.status === 'pending' ? '⏳ Pending' : a.status === 'accepted' ? '✅ Accepted' : '🏁 Completed'}</span>
+        ${a.status === 'accepted' ? `<button class="btn-sm btn-complete" onclick="markDone(${i})">Mark Done</button>` : ''}
+        ${a.status === 'pending' ? `<button class="btn-sm btn-reject" onclick="withdrawApp(${i})">Withdraw</button>` : ''}
+      </div>
+    </div>`).join('');
+
+  // auto-accept one after 2s for demo feel
+  const pendingIdx = myApplications.findIndex(a => a.status === 'pending');
+  if (pendingIdx >= 0) {
+    setTimeout(() => {
+      if (myApplications[pendingIdx]) {
+        myApplications[pendingIdx].status = 'accepted';
+        saveAll(); renderApplications();
+        toast('🎉', '"' + myApplications[pendingIdx].title + '" accepted!');
+      }
+    }, 2000);
+  }
+}
+
+function markDone(idx) {
+  const real = myApplications.length - 1 - idx;
+  myApplications[real].status = 'completed';
+  saveAll(); renderApplications(); toast('🏁','Job marked complete. Payment released!');
+}
+
+function withdrawApp(idx) {
+  const real = myApplications.length - 1 - idx;
+  const j = allJobs.find(x => x.id === myApplications[real].jobId);
+  if (j) j.applied = false;
+  myApplications.splice(real, 1);
+  saveAll(); renderApplications(); renderJobs(); toast('↩️','Application withdrawn');
+}
+
+// ─── PROFILE ──────────────────────────────────────────────────────────────────
+function renderProfile() {
+  const u = currentUser;
+  const completed = myApplications.filter(a => a.status === 'completed').length;
+  const earnings = myApplications.filter(a => a.status === 'completed').reduce((s, a) => s + a.wage, 0);
+  document.getElementById('profileContent').innerHTML = `
+    <div class="profile-top">
+      <div class="profile-avatar">${u.name[0]}</div>
+      <div class="profile-name">${u.name}</div>
+      <div class="profile-type">
+        ${u.type === 'worker' ? '👷 Daily Wage Worker' : '🏢 Contractor / Employer'}
+        <span class="verified-tick">✓ Verified</span>
+      </div>
+      <div class="profile-stats">
+        <div class="p-stat"><div class="p-stat-val">${u.rating}⭐</div><div class="p-stat-lbl">Rating</div></div>
+        <div class="p-stat"><div class="p-stat-val">${u.jobs + completed}</div><div class="p-stat-lbl">Jobs Done</div></div>
+        <div class="p-stat"><div class="p-stat-val">₹${((u.earnings + earnings)/1000).toFixed(0)}K</div><div class="p-stat-lbl">${u.type === 'worker' ? 'Earned' : 'Hired Budget'}</div></div>
+      </div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-card">
+        <h3>Contact Info</h3>
+        <div class="info-row"><span class="key">Phone</span><span class="val">${u.phone}</span></div>
+        <div class="info-row"><span class="key">Location</span><span class="val">${u.city}</span></div>
+        <div class="info-row"><span class="key">Account Type</span><span class="val">${u.type === 'worker' ? 'Worker' : 'Contractor'}</span></div>
+        <div class="info-row"><span class="key">Member Since</span><span class="val">April 2026</span></div>
+        <div class="info-row"><span class="key">Language</span><span class="val">Kannada, Hindi</span></div>
+      </div>
+      <div class="profile-card">
+        <h3>${u.type === 'worker' ? 'Skills' : 'Business Profile'}</h3>
+        <div>${u.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>
+        <div style="margin-top:20px">
+          <h3 style="margin-bottom:12px">Recent Activity</h3>
+          ${myApplications.length ? myApplications.slice(-3).reverse().map(a => `
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:.85rem">
+              <span>${a.title.slice(0,28)}...</span>
+              <span class="app-status app-${a.status}" style="font-size:.72rem;padding:3px 10px">${a.status}</span>
+            </div>`).join('') : '<p style="color:var(--gy);font-size:.88rem">No recent activity</p>'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+document.getElementById('navUser').textContent = currentUser.name;
+renderJobs();
+renderPostedJobs();
+</script>
+</body>
+</html>
